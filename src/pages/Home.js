@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PokemonCard from '../components/PokemonCard';
 
 function Home() {
     
@@ -28,11 +29,11 @@ function Home() {
       <div>
     
      {pokemonArray.map((pokemon) => 
-         <li>
-             <img src={pokemon.image} />
-             <h5>{pokemon.name}</h5>
-             <h5>{pokemon.type}</h5>
-         </li>) } 
+         <PokemonCard 
+            name ={pokemon.name}
+            image={pokemon.image}
+            type={pokemon.type}
+        /> )} ;
     </div>
   )
 }
