@@ -5,9 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#pokedex-slot {
+display: grid; 
+grid-template-columns: 1fr 1fr 1fr;
+grid-gap: 2rem;
+margin-top:4rem;  
 }
