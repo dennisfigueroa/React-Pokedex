@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PokemonCard from '../components/PokemonCard';
+import Navbar from '../components/Navbar'; 
+import FilterOptions from '../components/FilterOptions';
 
 function Home() {
     const pokemonTypes = ['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
@@ -11,7 +13,10 @@ function Home() {
         console.log(typeSelected); 
         setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)));
         console.log(filteredPokemonArray); 
-
+    }
+    const refreshPage = () => {
+        setFilteredPokemonArray(null);
+        console.log("refresh")
     }
 
     // const clickHandler = async (e) => {
@@ -28,7 +33,7 @@ function Home() {
             const rawData = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
             const convertedData = await rawData.json();
             const pokemon = {
-                name: convertedData.name,
+                name: convertedData.name.charAt(0).toUpperCase() + convertedData.name.slice(1),
                 id: convertedData.id,
                 image: convertedData.sprites.other['official-artwork']['front_default'],
                 type: convertedData.types.map((type) => type.type.name).join(', '),
@@ -45,11 +50,15 @@ function Home() {
     
     return (
         <div>
-            <h2>Dennis Pokedex</h2>
+            <Navbar />
+            <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
+            <button onClick = {refreshPage}>All</button>
             <div id="pokemon-types">
                 {pokemonTypes.map((types) => {return <button onClick={clickHandler}>{types}</button>})} 
                 </div>
+                
             <div className="container">
+            
                 <div id="pokedex-slot">
                     {filteredPokemonArray 
                         
