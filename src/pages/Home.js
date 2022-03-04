@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PokemonCard from '../components/PokemonCard';
 import Navbar from '../components/Navbar'; 
-import FilterOptions from '../components/FilterOptions';
 
 function Home() {
     const pokemonTypes = ['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
@@ -53,7 +52,9 @@ function Home() {
             <Navbar />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <button style={{marginBottom: '2rem'}} onClick = {refreshPage}>Refresh all</button>
+            <div>Search <input></input></div>
             <div id="pokemon-types" style={{display:'flex', justifyContent:'center'}}>
+                
                 <span style={{marginRight: '2rem'}}>Choose a type: </span>
                 <select onChange={clickHandler}>
                 {pokemonTypes.map((types) => {return <option value = {types}>{types.charAt(0).toUpperCase()+types.slice(1)}</option>})} 
