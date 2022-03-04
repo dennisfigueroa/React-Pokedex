@@ -9,8 +9,8 @@ function Home() {
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
 
     const clickHandler = (e) => {
-        const typeSelected = e.target.innerText; 
-        console.log(typeSelected); 
+       const typeSelected = e.target.value; 
+        console.log(e.target.value); 
         setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)));
         console.log(filteredPokemonArray); 
     }
@@ -52,9 +52,13 @@ function Home() {
         <div>
             <Navbar />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
-            <button onClick = {refreshPage}>All</button>
-            <div id="pokemon-types">
-                {pokemonTypes.map((types) => {return <button onClick={clickHandler}>{types}</button>})} 
+            <button style={{marginBottom: '2rem'}} onClick = {refreshPage}>Refresh all</button>
+            <div id="pokemon-types" style={{display:'flex', justifyContent:'center'}}>
+                <span style={{marginRight: '2rem'}}>Choose a type: </span>
+                <select onChange={clickHandler}>
+                {pokemonTypes.map((types) => {return <option value = {types}>{types.charAt(0).toUpperCase()+types.slice(1)}</option>})} 
+                </select>
+
                 </div>
                 
             <div className="container">
