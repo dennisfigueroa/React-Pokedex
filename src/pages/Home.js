@@ -3,15 +3,20 @@ import PokemonCard from '../components/PokemonCard';
 import Navbar from '../components/Navbar'; 
 
 function Home() {
-    const pokemonTypes = ['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
+    const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
     const [pokemonArray, setPokemonArray] = useState([]);
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
 
     const clickHandler = (e) => {
+        if (e.target.value != '--all--') {
        const typeSelected = e.target.value; 
         console.log(e.target.value); 
         setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)));
         console.log(filteredPokemonArray); 
+        }
+        else {
+            refreshPage();
+        }
     }
     const refreshPage = () => {
         setFilteredPokemonArray(null);
