@@ -17,15 +17,21 @@ function Home() {
         setFilteredPokemonArray(null);
         console.log("refresh")
     }
-
-    // const clickHandler = async (e) => {
-    //     const typeChosen = e.target.innerText;
-    //     const filteredPokemonByType = await fetch(`https://pokeapi.co/api/v2/type/${typeChosen}`);
-    //     const filteredPokemonByTypeJSON = await filteredPokemonByType.json();
-    //     const findingPokemonName = filteredPokemonByTypeJSON.pokemon;
-    //     console.log(filteredPokemonByTypeJSON);
-    //     console.log(findingPokemonName);
-    // }
+    // This function handles the search input and updates the pokemon array state. 
+    const inputHandler = (e) => {
+        let savedWord = e.target.value;
+        let fixedWord = '';
+      console.log(savedWord);
+      if (savedWord.length > 1) {
+         fixedWord = savedWord.charAt(0).toUpperCase() + savedWord.slice(1);
+      }
+      else {
+         fixedWord = savedWord.charAt(0).toUpperCase()
+      }     
+        setFilteredPokemonArray(pokemonArray.filter(pokemon => { return pokemon.name.includes(e.target.value) || pokemon.name.includes(fixedWord)
+        
+        }));
+    }
 
     const apiCall = async () => {
         for (let i = 1; i < 500; i++) {
@@ -52,7 +58,7 @@ function Home() {
             <Navbar />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <button style={{marginBottom: '2rem'}} onClick = {refreshPage}>Refresh all</button>
-            <div>Search <input></input></div>
+            <div>Search <input onChange={inputHandler}></input></div>
             <div id="pokemon-types" style={{display:'flex', justifyContent:'center'}}>
                 
                 <span style={{marginRight: '2rem'}}>Choose a type: </span>
