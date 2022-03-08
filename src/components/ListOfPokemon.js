@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import PokemonCard from './PokemonCard';
+import Team from '../components/Team'; 
 
 
 function Home() {
     const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
     const [pokemonArray, setPokemonArray] = useState([]);
+    const [data, setData] = useState('');
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
 
     /*The following @clickHandler is an event handler when the user selects a type from the provided list, if the type is a proper type,
@@ -20,6 +22,11 @@ function Home() {
         else {
             refreshPage();
         }
+    }
+
+    const pokemonTeamHandler = (teamData) => {
+        console.log(teamData);
+        setData(teamData);
     }
 
     /*The @refreshPage function will empty the setFiltered array with nothing in it to force a refresh on the page because if setFiltered
@@ -49,7 +56,7 @@ function Home() {
     If it has multiple types, it will join the type array with a comma and essentially convert it to string which is much easier to use. 
     */
     const apiCall = async () => {
-        for (let i = 1; i < 500; i++) {
+        for (let i = 1; i < 151; i++) {
             const rawData = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
             const convertedData = await rawData.json();
             const pokemon = {
@@ -72,6 +79,9 @@ function Home() {
     
     return (
         <div>
+            <Team 
+                
+            />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <div className="mb-2">Name <input onChange={inputHandler}></input></div>
             <div id="pokemon-types" style={{display:'flex', justifyContent:'center'}}>
@@ -95,6 +105,7 @@ function Home() {
                             name={pokemon.name}
                             image={pokemon.image}
                             type={pokemon.type}
+                            pokemonTeamHandler={pokemonTeamHandler}
                         />)
 
                         : pokemonArray.map((pokemon) =>
@@ -102,6 +113,7 @@ function Home() {
                                 name={pokemon.name}
                                 image={pokemon.image}
                                 type={pokemon.type}
+                                pokemonTeamHandler={pokemonTeamHandler}
                             />)
                     };
                     </div>
