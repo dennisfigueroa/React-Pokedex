@@ -25,7 +25,6 @@ function Home() {
     }
 
     const pokemonTeamHandler = (teamData) => {
-        console.log(teamData);
         setData(teamData);
     }
 
@@ -75,12 +74,11 @@ function Home() {
     useEffect(() => {
         apiCall();
     }, [])  
-    
-    
+        
     return (
         <div>
             <Team 
-                
+                teamOne={data}
             />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <div className="mb-2">Name <input onChange={inputHandler}></input></div>
