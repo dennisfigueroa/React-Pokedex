@@ -7,6 +7,11 @@ function Home() {
     const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
     const [pokemonArray, setPokemonArray] = useState([]);
     const [data, setData] = useState('');
+    const [secondPokemon, setSecondPokemon] = useState(''); 
+    const [thirdPokemon, setThirdPokemon] = useState('');
+    const [fourthPokemon, setFourthPokemon] = useState('');
+    const [fifthPokemon, setFifthPokemon] = useState('');
+    const [sixthPokemon, setSixthPokemon] = useState('');
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
 
     /*The following @clickHandler is an event handler when the user selects a type from the provided list, if the type is a proper type,
@@ -25,7 +30,16 @@ function Home() {
     }
 
     const pokemonTeamHandler = (teamData) => {
-        setData(teamData);
+        const listOfData = [data, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
+        const listOfStates = [setData, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
+        for(let i = 0; i<listOfData.length; i++) {
+        if(listOfData[i] === '') {
+            const found = listOfStates[i];
+            found(teamData)
+            break;
+        }
+    }
+
     }
 
     /*The @refreshPage function will empty the setFiltered array with nothing in it to force a refresh on the page because if setFiltered
@@ -79,6 +93,11 @@ function Home() {
         <div>
             <Team 
                 teamOne={data}
+                teamTwo={secondPokemon}
+                teamThree={thirdPokemon}
+                teamFour={fourthPokemon}
+                teamFive={fifthPokemon}
+                teamSix={sixthPokemon}
             />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <div className="mb-2">Name <input onChange={inputHandler}></input></div>
