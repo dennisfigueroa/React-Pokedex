@@ -6,23 +6,30 @@ function Home() {
     const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
     const [pokemonArray, setPokemonArray] = useState([]);
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
-    
-    const clickHandler = (e) => {
-        if (e.target.value != '--all--') {
+
+    /*The following @clickHandler is an event handler when the user selects a type from the provided list, if the type is a proper type,
+    then it will set the secondary filtered pokemon array with an array that uses the filter array method on the original array. 
+    If it is not a valid type but rather all types then it will run the refreshPage function
+    */
+    const clickHandler = (e) => { 
+        if (e.target.value != '--all--') {  
        const typeSelected = e.target.value; 
-        console.log(e.target.value); 
-        setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)));
+        setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected))); //
         console.log(filteredPokemonArray); 
         }
         else {
             refreshPage();
         }
     }
+
+    /*The @refreshPage function will empty the setFiltered array with nothing in it to force a refresh on the page because if setFiltered
+    is empty then it will default to the original array with all of the pokemon from the original call. */
+
     const refreshPage = () => {
         setFilteredPokemonArray(null);
         console.log("refresh")
     }
-    // This function handles the search input and updates the pokemon array state. 
+    // This function handles the search input and updates the pokemon array state. It also works to ensure that it is not case sensitive. 
     const inputHandler = (e) => {
         let savedWord = e.target.value;
         let fixedWord = '';
@@ -37,7 +44,10 @@ function Home() {
         
         }));
     }
-
+    /* The @apiCall function will do an asynchronus call to the pokemon API. It will loop on every instance of pokemon and convert the raw
+    data to json. Finally, on each iteration of pokemon, it will specifically grab the name, the id, the image and the type of the pokemon.
+    If it has multiple types, it will join the type array with a comma and essentially convert it to string which is much easier to use. 
+    */
     const apiCall = async () => {
         for (let i = 1; i < 500; i++) {
             const rawData = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
@@ -48,11 +58,13 @@ function Home() {
                 image: convertedData.sprites.other['official-artwork']['front_default'],
                 type: convertedData.types.map((type) => type.type.name).join(', '),
             }
-            //grab the current array, then spread it out and add current pokemon object 
+            /*grab the current array, then spread it out and add current pokemon object into the array. This is a way to continue to 
+            incremenet the array with an additional pokemon. 
+            */
             setPokemonArray(currentList => [...currentList, pokemon])
         }
     }
-    
+    // The @useEffect function will run apiCall on the initial launch of the page to grab the pokemon information. 
     useEffect(() => {
         apiCall();
     }, [])  
@@ -72,7 +84,11 @@ function Home() {
                 </div>
                 
                 <div id="pokedex-slot">
-                    {filteredPokemonArray 
+                    {/* Is filteredPokemonArray is "true" or essentially has something in it, then it will populate the page with 
+                        the pokemon that fuifill the filter requirement, however if it is empty then it will populate the page 
+                        with just generally all pokemon from the initial call. 
+                    */
+                    filteredPokemonArray 
                         
                         ? filteredPokemonArray.map((pokemon) =>
                         <PokemonCard
