@@ -6,7 +6,7 @@ function Home() {
     const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
     const [pokemonArray, setPokemonArray] = useState([]);
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
-
+    
     const clickHandler = (e) => {
         if (e.target.value != '--all--') {
        const typeSelected = e.target.value; 
@@ -61,7 +61,7 @@ function Home() {
     return (
         <div>
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
-            <div>Search <input onChange={inputHandler}></input></div>
+            <div className="mb-2">Name <input onChange={inputHandler}></input></div>
             <div id="pokemon-types" style={{display:'flex', justifyContent:'center'}}>
                 
                 <span style={{marginRight: '2rem'}}>Choose a type: </span>

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 function navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ padding:"1rem 1.5rem"}}>
-            <a className="navbar-brand" href="#" style={{fontSize: '2rem'}}>Pokedex</a>
+            <a className="navbar-brand" href="#"><img src={require('../assets/pokemon.png')} style={{maxWidth: '300px', flex:'1'}}/></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
