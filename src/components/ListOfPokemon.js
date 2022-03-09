@@ -29,13 +29,14 @@ function Home() {
         }
     }
 
-    const pokemonTeamHandler = (teamData) => {
+    const pokemonTeamHandler = (imageData, nameData) => {
+        setPokemonArray(pokemonArray.filter(pokemon => pokemon.name != nameData))
         const listOfData = [data, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
         const listOfStates = [setData, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
         for(let i = 0; i<listOfData.length; i++) {
         if(listOfData[i] === '') {
             const found = listOfStates[i];
-            found(teamData)
+            found(imageData)
             break;
         }
     }
