@@ -29,6 +29,9 @@ function Home() {
         }
     }
 
+    const removeTeamMember = () => {
+    }
+
     const pokemonTeamHandler = (imageData, nameData) => {
         setPokemonArray(pokemonArray.filter(pokemon => pokemon.name != nameData))
         const listOfData = [data, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
@@ -99,6 +102,7 @@ function Home() {
                 teamFour={fourthPokemon}
                 teamFive={fifthPokemon}
                 teamSix={sixthPokemon}
+                removeTeamMember={removeTeamMember}
             />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <div className="mb-2">Name <input onChange={inputHandler}></input></div>
