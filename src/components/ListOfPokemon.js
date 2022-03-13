@@ -13,6 +13,7 @@ function Home() {
     const [fifthPokemon, setFifthPokemon] = useState('');
     const [sixthPokemon, setSixthPokemon] = useState('');
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
+    const [teamPokemon, setTeamPokemon] = useState([]);
 
     /*The following @clickHandler is an event handler when the user selects a type from the provided list, if the type is a proper type,
     then it will set the secondary filtered pokemon array with an array that uses the filter array method on the original array. 
@@ -29,10 +30,8 @@ function Home() {
         }
     }
 
-    const removeTeamMember = () => {
-    }
-
     const pokemonTeamHandler = (imageData, nameData) => {
+        setTeamPokemon(teamArray => [...teamArray, imageData]); 
         setPokemonArray(pokemonArray.filter(pokemon => pokemon.name != nameData))
         const listOfData = [data, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
         const listOfStates = [setData, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
@@ -46,6 +45,10 @@ function Home() {
 
     }
 
+    const removeTeamMember = (image) => {
+         setTeamPokemon(teamPokemon.filter((pokemonImage) => pokemonImage != image ))
+    }
+
     /*The @refreshPage function will empty the setFiltered array with nothing in it to force a refresh on the page because if setFiltered
     is empty then it will default to the original array with all of the pokemon from the original call. */
 
@@ -53,6 +56,7 @@ function Home() {
         setFilteredPokemonArray(null);
         console.log("refresh")
     }
+
     // This function handles the search input and updates the pokemon array state. It also works to ensure that it is not case sensitive. 
     const inputHandler = (e) => {
         let savedWord = e.target.value;

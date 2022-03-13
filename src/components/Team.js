@@ -19,6 +19,8 @@ function Team({ teamOne, teamTwo, teamThree, teamFour, teamFive, teamSix, remove
     const placeEgg = (teamMember, setTeam) => {
         if (teamMember != pokemonEgg) {
             setTeam(pokemonEgg); 
+            console.log(teamMember); 
+            removeTeamMember(teamMember)
         }
     }
 
