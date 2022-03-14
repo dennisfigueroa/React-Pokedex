@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import PokemonCard from './PokemonCard';
 import Team from '../components/Team'; 
+import useIsMount from '../components/useIsMount';
 
 
 function Home() {
     const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
     const [pokemonArray, setPokemonArray] = useState([]);
-    const [data, setData] = useState('');
+    const [unclickedPokemonArray, setUnclickedPokemonArray] = useState(null);
+    const [firstPokemon, setFirstPokemon] = useState('');
     const [secondPokemon, setSecondPokemon] = useState(''); 
     const [thirdPokemon, setThirdPokemon] = useState('');
     const [fourthPokemon, setFourthPokemon] = useState('');
@@ -15,10 +17,13 @@ function Home() {
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
     const [teamPokemon, setTeamPokemon] = useState([]);
 
+    const isMount = useIsMount();
     /*The following @clickHandler is an event handler when the user selects a type from the provided list, if the type is a proper type,
     then it will set the secondary filtered pokemon array with an array that uses the filter array method on the original array. 
     If it is not a valid type but rather all types then it will run the refreshPage function
     */
+    
+    
     const clickHandler = (e) => { 
         if (e.target.value != '--all--') {  
        const typeSelected = e.target.value; 
@@ -30,24 +35,35 @@ function Home() {
         }
     }
 
-    const pokemonTeamHandler = (imageData, nameData) => {
+    const pokemonTeamHandler = (imageData) => {
         setTeamPokemon(teamArray => [...teamArray, imageData]); 
-        setPokemonArray(pokemonArray.filter(pokemon => pokemon.name != nameData))
-        const listOfData = [data, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
-        const listOfStates = [setData, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
-        for(let i = 0; i<listOfData.length; i++) {
-        if(listOfData[i] === '') {
-            const found = listOfStates[i];
-            found(imageData)
+
+        setUnclickedPokemonArray(pokemonArray.filter(pokemon => !teamPokemon.includes(pokemon.image)))
+        const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
+        const setterForAllPokemonOnTeam = [setFirstPokemon, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
+        for(let i = 0; i<allPokemonOnTeam.length; i++) {
+        if(allPokemonOnTeam[i] === '') {
+            const correspondingSetter = setterForAllPokemonOnTeam[i];
+            correspondingSetter(imageData)
             break;
         }
     }
 
     }
-
+    useEffect(() => {console.log(secondPokemon)}, [secondPokemon, thirdPokemon])
+    
     const removeTeamMember = (image) => {
          setTeamPokemon(teamPokemon.filter((pokemonImage) => pokemonImage != image ))
-    }
+  }
+    useEffect(() => {
+        /* This uses a custom hook to work, what it does is it sets isMount to true initially, 
+        and will only convert it to false after the first render. It uses ref instead of state
+        since we don't want to trigger a re-render. 
+        */
+        if(!isMount){
+        setUnclickedPokemonArray(pokemonArray.filter(pokemon => !teamPokemon.includes(pokemon.image)) ) 
+    }}, [teamPokemon])
+
 
     /*The @refreshPage function will empty the setFiltered array with nothing in it to force a refresh on the page because if setFiltered
     is empty then it will default to the original array with all of the pokemon from the original call. */
@@ -100,7 +116,7 @@ function Home() {
     return (
         <div>
             <Team 
-                teamOne={data}
+                teamOne={firstPokemon}
                 teamTwo={secondPokemon}
                 teamThree={thirdPokemon}
                 teamFour={fourthPokemon}
@@ -124,9 +140,9 @@ function Home() {
                         the pokemon that fuifill the filter requirement, however if it is empty then it will populate the page 
                         with just generally all pokemon from the initial call. 
                     */
-                    filteredPokemonArray 
+                   unclickedPokemonArray 
                         
-                        ? filteredPokemonArray.map((pokemon) =>
+                        ? unclickedPokemonArray.map((pokemon) =>
                         <PokemonCard
                             name={pokemon.name}
                             image={pokemon.image}
@@ -141,6 +157,7 @@ function Home() {
                                 type={pokemon.type}
                                 pokemonTeamHandler={pokemonTeamHandler}
                             />)
+                    
                     };
                     </div>
 
