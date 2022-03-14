@@ -1,60 +1,45 @@
 import React, {useEffect, useState} from 'react'
 import {Container} from 'react-bootstrap';
 
-function Team({ teamOne, teamTwo, teamThree, teamFour, teamFive, teamSix, removeTeamMember }) {
-    const pokemonEgg = require('../assets/pokemonEgg.png');
-    const [teamMemberOne, setTeamMemberOne] = useState(pokemonEgg)
-    const [teamMemberTwo, setTeamMemberTwo] = useState(pokemonEgg)
-    const [teamMemberThree, setTeamMemberThree] = useState(pokemonEgg)
-    const [teamMemberFour, setTeamMemberFour] = useState(pokemonEgg)
-    const [teamMemberFifth, setTeamMemberFifth] = useState(pokemonEgg)
-    const [teamMemberSixth, setTeamMemberSixth] = useState(pokemonEgg)
+function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, thirdPokemon, setThirdPokemon, fourthPokemon, setFourthPokemon, fifthPokemon, setFifthPokemon, sixthPokemon, setSixthPokemon, removeTeamMember, placeEgg }) {
     
-
    // try {
     // if (teamOne != '') { 
     //     console.log(`This is from the team component: ${teamOne}`);
     // }
 
-    const placeEgg = (teamMember, setTeam) => {
-        if (teamMember != pokemonEgg) {
-            setTeam(pokemonEgg); 
-        
-            removeTeamMember(teamMember)
-        }
-    }
 
-    useEffect(() => {
-        if (teamOne) {
-            setTeamMemberOne(teamOne);
-        }
-    }, [teamOne]);
+    // useEffect(() => {
+    //     if (teamOne) {
+    //         setTeamMemberOne(teamOne);
+    //     }
+    // }, [teamOne]);
 
-    useEffect(() => {
-        if (teamTwo) {
-            setTeamMemberTwo(teamTwo);
-        }
-    }, [teamTwo]);
-    useEffect(() => {
-        if (teamThree) {
-            setTeamMemberThree(teamThree);
-        }
-    }, [teamThree]);
-    useEffect(() => {
-        if (teamFour) {
-            setTeamMemberFour(teamFour);
-        }
-    }, [teamFour]);
-    useEffect(() => {
-        if (teamFive) {
-            setTeamMemberFifth(teamFive);
-        }
-    }, [teamFive]);
-    useEffect(() => {
-        if (teamSix) {
-            setTeamMemberSixth(teamSix);
-        }
-    }, [teamSix]);
+    // useEffect(() => {
+    //     if (teamTwo) {
+    //         setTeamMemberTwo(teamTwo);
+    //     }
+    // }, [teamTwo]);
+    // useEffect(() => {
+    //     if (teamThree) {
+    //         setTeamMemberThree(teamThree);
+    //     }
+    // }, [teamThree]);
+    // useEffect(() => {
+    //     if (teamFour) {
+    //         setTeamMemberFour(teamFour);
+    //     }
+    // }, [teamFour]);
+    // useEffect(() => {
+    //     if (teamFive) {
+    //         setTeamMemberFifth(teamFive);
+    //     }
+    // }, [teamFive]);
+    // useEffect(() => {
+    //     if (teamSix) {
+    //         setTeamMemberSixth(teamSix);
+    //     }
+    // }, [teamSix]);
 
  //   }
   //  catch (e) {
@@ -65,22 +50,22 @@ function Team({ teamOne, teamTwo, teamThree, teamFour, teamFive, teamSix, remove
     return (
         <Container className="d-flex justify-content-center align-items-center mb-5 mt-5" style={{ backgroundColor: '#f2f3f2', paddingBottom: '2.5rem', borderRadius:'2rem' }}>
             <div>
-                <img src={teamMemberOne} style={{maxWidth:'190px'}} onClick={() => {placeEgg(teamMemberOne, setTeamMemberOne)}}/>
+                <img src={firstPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(firstPokemon, setFirstPokemon)}}/>
             </div>
             <div>
-                <img src={teamMemberTwo} style={{maxWidth:'190px'}} onClick={() => {placeEgg(teamMemberTwo, setTeamMemberTwo)}}/>
+                <img src={secondPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(secondPokemon, setSecondPokemon)}}/>
             </div>
             <div>
-                <img src={teamMemberThree} style={{maxWidth:'190px'}} onClick={() => {placeEgg(teamMemberThree, setTeamMemberThree)}}/>
+                <img src={thirdPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(thirdPokemon, setThirdPokemon)}}/>
             </div>
             <div>
-                <img src={teamMemberFour} style={{maxWidth:'190px'}} onClick={() => {placeEgg(teamMemberFour, setTeamMemberFour)}}/>
+                <img src={fourthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(fourthPokemon, setFourthPokemon)}}/>
             </div>
             <div>
-                <img src={teamMemberFifth} style={{maxWidth:'190px'}} onClick={() => {placeEgg(teamMemberFifth, setTeamMemberFifth)}}/>
+                <img src={fifthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(fifthPokemon, setFifthPokemon)}}/>
             </div>
             <div>
-                <img src={teamMemberSixth} style={{maxWidth:'190px'}} onClick={() => {placeEgg(teamMemberSixth, setTeamMemberSixth)}}/>
+                <img src={sixthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(sixthPokemon, setSixthPokemon)}}/>
             </div>
         </Container>
     )

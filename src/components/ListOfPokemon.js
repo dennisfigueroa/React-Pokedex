@@ -6,14 +6,15 @@ import useIsMount from '../components/useIsMount';
 
 function Home() {
     const pokemonTypes = ['--all--','normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy'];
+    const pokemonEgg = require('../assets/pokemonEgg.png');
     const [pokemonArray, setPokemonArray] = useState([]);
     const [unclickedPokemonArray, setUnclickedPokemonArray] = useState(null);
-    const [firstPokemon, setFirstPokemon] = useState('');
-    const [secondPokemon, setSecondPokemon] = useState(''); 
-    const [thirdPokemon, setThirdPokemon] = useState('');
-    const [fourthPokemon, setFourthPokemon] = useState('');
-    const [fifthPokemon, setFifthPokemon] = useState('');
-    const [sixthPokemon, setSixthPokemon] = useState('');
+    const [firstPokemon, setFirstPokemon] = useState(pokemonEgg);
+    const [secondPokemon, setSecondPokemon] = useState(pokemonEgg); 
+    const [thirdPokemon, setThirdPokemon] = useState(pokemonEgg);
+    const [fourthPokemon, setFourthPokemon] = useState(pokemonEgg);
+    const [fifthPokemon, setFifthPokemon] = useState(pokemonEgg);
+    const [sixthPokemon, setSixthPokemon] = useState(pokemonEgg);
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
     const [teamPokemon, setTeamPokemon] = useState([]);
 
@@ -35,14 +36,20 @@ function Home() {
         }
     }
 
+    const placeEgg = (teamMember, setTeam) => {
+        if (teamMember != pokemonEgg) {
+            setTeam(pokemonEgg); 
+        
+            removeTeamMember(teamMember)
+        }
+    }
     const pokemonTeamHandler = (imageData) => {
         setTeamPokemon(teamArray => [...teamArray, imageData]); 
-
         setUnclickedPokemonArray(pokemonArray.filter(pokemon => !teamPokemon.includes(pokemon.image)))
         const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
         const setterForAllPokemonOnTeam = [setFirstPokemon, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
         for(let i = 0; i<allPokemonOnTeam.length; i++) {
-        if(allPokemonOnTeam[i] === '') {
+        if(allPokemonOnTeam[i] === pokemonEgg) {
             const correspondingSetter = setterForAllPokemonOnTeam[i];
             correspondingSetter(imageData)
             break;
@@ -116,13 +123,20 @@ function Home() {
     return (
         <div>
             <Team 
-                teamOne={firstPokemon}
-                teamTwo={secondPokemon}
-                teamThree={thirdPokemon}
-                teamFour={fourthPokemon}
-                teamFive={fifthPokemon}
-                teamSix={sixthPokemon}
+                firstPokemon={firstPokemon}
+                setFirstPokemon={setFirstPokemon}
+                secondPokemon={secondPokemon}
+                setSecondPokemon={setSecondPokemon}
+                thirdPokemon={thirdPokemon}
+                setThirdPokemon={setThirdPokemon}
+                fourthPokemon={fourthPokemon}
+                setFourthPokemon={setFourthPokemon}
+                fifthPokemon={fifthPokemon}
+                setFifthPokemon={setFifthPokemon}
+                sixthPokemon={sixthPokemon}
+                setSixthPokemon={setSixthPokemon}
                 removeTeamMember={removeTeamMember}
+                placeEgg={placeEgg}
             />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <div className="mb-2">Name <input onChange={inputHandler}></input></div>
