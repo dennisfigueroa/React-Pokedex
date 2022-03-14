@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Container} from 'react-bootstrap';
 
 function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, thirdPokemon, setThirdPokemon, fourthPokemon, setFourthPokemon, fifthPokemon, setFifthPokemon, sixthPokemon, setSixthPokemon, removeTeamMember, placeEgg }) {
