@@ -155,10 +155,13 @@ function Home() {
       }
       else {
          fixedWord = savedWord.charAt(0).toUpperCase()
-      }     
-        setFilteredPokemonArray(pokemonArray.filter(pokemon => { return pokemon.name.includes(e.target.value) || pokemon.name.includes(fixedWord)
-        
-        }));
+      } 
+        if (unclickedPokemonArray){
+        setFilteredPokemonArray(unclickedPokemonArray.filter(pokemon => {return pokemon.name.includes(e.target.value) || pokemon.name.includes(fixedWord)}))
+        }
+        else {
+            setFilteredPokemonArray(pokemonArray.filter(pokemon => { return pokemon.name.includes(e.target.value) || pokemon.name.includes(fixedWord)}))
+        }
     }
     /* The @apiCall function will do an asynchronus call to the pokemon API. It will loop on every instance of pokemon and convert the raw
     data to json. Finally, on each iteration of pokemon, it will specifically grab the name, the id, the image and the type of the pokemon.
