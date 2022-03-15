@@ -17,8 +17,40 @@ function Home() {
     const [sixthPokemon, setSixthPokemon] = useState(pokemonEgg);
     const [filteredPokemonArray, setFilteredPokemonArray] = useState(null); 
     const [teamPokemon, setTeamPokemon] = useState([]);
-
+    const inputRef = useRef();
     const isMount = useIsMount();
+    
+    const renderPokemonOut = () => {
+        
+        if (filteredPokemonArray) {
+            return filteredPokemonArray.map((pokemon) => 
+            <PokemonCard
+            name={pokemon.name}
+            image={pokemon.image}
+            type={pokemon.type}
+            pokemonTeamHandler={pokemonTeamHandler}
+              />)
+        }
+        else if (unclickedPokemonArray) {
+            return unclickedPokemonArray.map((pokemon) =>
+                <PokemonCard
+                    name={pokemon.name}
+                    image={pokemon.image}
+                    type={pokemon.type}
+                    pokemonTeamHandler={pokemonTeamHandler}
+                />)
+        }
+        else {
+            return pokemonArray.map((pokemon) =>
+            <PokemonCard
+                name={pokemon.name}
+                image={pokemon.image}
+                type={pokemon.type}
+                pokemonTeamHandler={pokemonTeamHandler}
+            />)
+        }
+    }
+        
     /*The following @clickHandler is an event handler when the user selects a type from the provided list, if the type is a proper type,
     then it will set the secondary filtered pokemon array with an array that uses the filter array method on the original array. 
     If it is not a valid type but rather all types then it will run the refreshPage function
@@ -28,55 +60,88 @@ function Home() {
     const clickHandler = (e) => { 
         if (e.target.value != '--all--') {  
        const typeSelected = e.target.value; 
-        setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected))); //
-        console.log(filteredPokemonArray); 
+            if (unclickedPokemonArray) {    
+                setFilteredPokemonArray(unclickedPokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)))
+            }
+            // else if (filteredPokemonArray) {
+            //     setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)))
+            // }
+            else
+            {
+                setFilteredPokemonArray(pokemonArray.filter((pokemon) => pokemon.type.includes(typeSelected)));
+
+            }
         }
         else {
-            refreshPage();
+            setFilteredPokemonArray(null);
         }
+
     }
 
     const placeEgg = (teamMember, setTeam) => {
         if (teamMember != pokemonEgg) {
             setTeam(pokemonEgg); 
-        
             removeTeamMember(teamMember)
         }
     }
     const pokemonTeamHandler = (imageData) => {
-        setTeamPokemon(teamArray => [...teamArray, imageData]); 
-        setUnclickedPokemonArray(pokemonArray.filter(pokemon => !teamPokemon.includes(pokemon.image)))
+        setTeamPokemon(teamArray => [...teamArray, imageData]);
+
+       
         const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
         const setterForAllPokemonOnTeam = [setFirstPokemon, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
-        for(let i = 0; i<allPokemonOnTeam.length; i++) {
-        if(allPokemonOnTeam[i] === pokemonEgg) {
-            const correspondingSetter = setterForAllPokemonOnTeam[i];
-            correspondingSetter(imageData)
-            break;
+        for (let i = 0; i < allPokemonOnTeam.length; i++) {
+            if (allPokemonOnTeam[i] === pokemonEgg) {
+                const correspondingSetter = setterForAllPokemonOnTeam[i];
+                correspondingSetter(imageData)
+                break;
+            }
         }
-    }
 
     }
-    useEffect(() => {console.log(secondPokemon)}, [secondPokemon, thirdPokemon])
+
     
     const removeTeamMember = (image) => {
          setTeamPokemon(teamPokemon.filter((pokemonImage) => pokemonImage != image ))
   }
+
     useEffect(() => {
         /* This uses a custom hook to work, what it does is it sets isMount to true initially, 
         and will only convert it to false after the first render. It uses ref instead of state
-        since we don't want to trigger a re-render. 
+        since we don't want to trigger a re-render. Once teamPokemon changes, it will run the following to update the view. 
         */
-        if(!isMount){
-        setUnclickedPokemonArray(pokemonArray.filter(pokemon => !teamPokemon.includes(pokemon.image)) ) 
-    }}, [teamPokemon])
+        if (!isMount) {
+            setUnclickedPokemonArray(pokemonArray.filter(pokemon => !teamPokemon.includes(pokemon.image)))
+           
+        }
+    }, [teamPokemon])
+
+    useEffect(() => {
+    if (!isMount){
+        if (filteredPokemonArray) {                                            
+            try{                              
+            setFilteredPokemonArray(unclickedPokemonArray.filter(pokemon => pokemon.type.includes(inputRef.current.value))) //Filter the filtered array and if pokemon image is not a part of team, display. 
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+    }
+    }, [unclickedPokemonArray])
+
+
+    
+    useEffect (() => {
+       
+       console.log(`This is the value: ${inputRef}`)
+    }, [inputRef])
 
 
     /*The @refreshPage function will empty the setFiltered array with nothing in it to force a refresh on the page because if setFiltered
     is empty then it will default to the original array with all of the pokemon from the original call. */
 
     const refreshPage = () => {
-        setFilteredPokemonArray(null);
+        setUnclickedPokemonArray(null);
         console.log("refresh")
     }
 
@@ -143,7 +208,7 @@ function Home() {
             <div id="pokemon-types" style={{display:'flex', justifyContent:'center'}}>
                 
                 <span style={{marginRight: '2rem'}}>Choose a type: </span>
-                <select onChange={clickHandler}>
+                <select ref ={inputRef} onChange={clickHandler}>
                 {pokemonTypes.map((types) => {return <option value = {types}>{types.charAt(0).toUpperCase()+types.slice(1)}</option>})} 
                 </select>
 
@@ -154,23 +219,24 @@ function Home() {
                         the pokemon that fuifill the filter requirement, however if it is empty then it will populate the page 
                         with just generally all pokemon from the initial call. 
                     */
-                   unclickedPokemonArray 
+                //    unclickedPokemonArray 
                         
-                        ? unclickedPokemonArray.map((pokemon) =>
-                        <PokemonCard
-                            name={pokemon.name}
-                            image={pokemon.image}
-                            type={pokemon.type}
-                            pokemonTeamHandler={pokemonTeamHandler}
-                        />)
+                //         ? unclickedPokemonArray.map((pokemon) =>
+                //         <PokemonCard
+                //             name={pokemon.name}
+                //             image={pokemon.image}
+                //             type={pokemon.type}
+                //             pokemonTeamHandler={pokemonTeamHandler}
+                //         />)
 
-                        : pokemonArray.map((pokemon) =>
-                            <PokemonCard
-                                name={pokemon.name}
-                                image={pokemon.image}
-                                type={pokemon.type}
-                                pokemonTeamHandler={pokemonTeamHandler}
-                            />)
+                //         : pokemonArray.map((pokemon) =>
+                //             <PokemonCard
+                //                 name={pokemon.name}
+                //                 image={pokemon.image}
+                //                 type={pokemon.type}
+                //                 pokemonTeamHandler={pokemonTeamHandler}
+                //             />)
+                renderPokemonOut()
                     
                     };
                     </div>
