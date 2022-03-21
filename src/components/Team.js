@@ -1,7 +1,7 @@
 import React from 'react'
 import {Container} from 'react-bootstrap';
 
-function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, thirdPokemon, setThirdPokemon, fourthPokemon, setFourthPokemon, fifthPokemon, setFifthPokemon, sixthPokemon, setSixthPokemon, removeTeamMember, placeEgg }) {
+function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, thirdPokemon, setThirdPokemon, fourthPokemon, setFourthPokemon, fifthPokemon, setFifthPokemon, sixthPokemon, setSixthPokemon, randomizeTeam, placeEgg }) {
     
    // try {
     // if (teamOne != '') { 
@@ -49,7 +49,7 @@ function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, 
 
     return (
         <Container className="d-flex justify-content-center align-items-center mb-5 mt-5" style={{ backgroundColor: '#f2f3f2', paddingBottom: '2.5rem', borderRadius:'2rem' }}>
-            <div>
+          <div>
                 <img src={firstPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(firstPokemon, setFirstPokemon)}}/>
             </div>
             <div>
@@ -67,6 +67,7 @@ function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, 
             <div>
                 <img src={sixthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(sixthPokemon, setSixthPokemon)}}/>
             </div>
+           <button onClick ={randomizeTeam}>Randomize Team</button>
         </Container>
     )
 }

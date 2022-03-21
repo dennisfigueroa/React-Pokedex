@@ -84,6 +84,23 @@ function Home() {
             removeTeamMember(teamMember)
         }
     }
+    
+    //Find a fix for repeated pokemon
+    const randomizeTeam = () => {
+       const randomOne = Math.floor(Math.random() * 151);
+       setFirstPokemon(pokemonArray[randomOne].image);
+       const randomTwo = Math.floor(Math.random() * 151);
+       setSecondPokemon(pokemonArray[randomTwo].image);
+       const randomThree = Math.floor(Math.random() * 151);
+       setThirdPokemon(pokemonArray[randomThree].image);
+       const randomFour = Math.floor(Math.random() * 151);
+       setFourthPokemon(pokemonArray[randomFour].image);
+       const randomFive = Math.floor(Math.random() * 151);
+       setFifthPokemon(pokemonArray[randomFive].image);
+       const randomSix = Math.floor(Math.random() * 151);
+       setSixthPokemon(pokemonArray[randomSix].image);
+    }
+
     const pokemonTeamHandler = (imageData) => {
         setTeamPokemon(teamArray => [...teamArray, imageData]);
 
@@ -205,6 +222,7 @@ function Home() {
                 setSixthPokemon={setSixthPokemon}
                 removeTeamMember={removeTeamMember}
                 placeEgg={placeEgg}
+                randomizeTeam={randomizeTeam}
             />
             <h3>All Pokemon. <br />Create an account to build and save your team!</h3>
             <div className="mb-2">Name <input onChange={inputHandler}></input></div>
