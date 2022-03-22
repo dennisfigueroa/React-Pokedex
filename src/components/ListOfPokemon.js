@@ -88,7 +88,7 @@ function Home() {
     //Find a fix for repeated pokemon
     const randomizeTeam = () => {
        const randomOne = Math.floor(Math.random() * 151);
-       setFirstPokemon(pokemonArray[randomOne].image);
+       setFirstPokemon(unclickedPokemonArray[randomOne].image);
        const randomTwo = Math.floor(Math.random() * 151);
        setSecondPokemon(pokemonArray[randomTwo].image);
        const randomThree = Math.floor(Math.random() * 151);
