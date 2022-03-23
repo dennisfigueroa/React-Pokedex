@@ -87,31 +87,50 @@ function Home() {
     
     //Find a fix for repeated pokemon
     const randomizeTeam = () => {
-       const randomOne = Math.floor(Math.random() * 151);
+
+       const randomTeamArray = [];
+       let i;
+       for(i =0; randomTeamArray.length < 6; i++) {
+           let randomNumber = Math.floor(Math.random() * 151) + 1;
+           if (randomTeamArray.indexOf(randomNumber) === -1) {
+           randomTeamArray.push(randomNumber);
+           }
+       }
+      setFirstPokemon(pokemonArray[randomTeamArray[0]].image);
+      setSecondPokemon(pokemonArray[randomTeamArray[1]].image);
+      setThirdPokemon(pokemonArray[randomTeamArray[2]].image);
+      setFourthPokemon(pokemonArray[randomTeamArray[3]].image);
+      setFifthPokemon(pokemonArray[randomTeamArray[4]].image);
+      setSixthPokemon(pokemonArray[randomTeamArray[5]].image);
+
+
+
+
+       //const randomOne = Math.floor(Math.random() * 151) + 1;
       // pokemonTeamHandler(pokemonArray[randomOne].image);
 
-       setFirstPokemon(pokemonArray[randomOne].image);
-       const randomTwo = Math.floor(Math.random() * 151);
+      // setFirstPokemon(pokemonArray[randomOne].image);
+      // const randomTwo = Math.floor(Math.random() * 151) +1;
        //pokemonTeamHandler(pokemonArray[randomTwo].image);
 
-       setSecondPokemon(pokemonArray[randomTwo].image);
-       const randomThree = Math.floor(Math.random() * 151);
+      // setSecondPokemon(pokemonArray[randomTwo].image);
+       //const randomThree = Math.floor(Math.random() * 151) +1 ;
        //pokemonTeamHandler(pokemonArray[randomThree].image);
 
-       setThirdPokemon(pokemonArray[randomThree].image);
-       const randomFour = Math.floor(Math.random() * 151);
+      // setThirdPokemon(pokemonArray[randomThree].image);
+       //const randomFour = Math.floor(Math.random() * 151) +1;
        //pokemonTeamHandler(pokemonArray[randomFour].image);
 
-       setFourthPokemon(pokemonArray[randomFour].image);
-       const randomFive = Math.floor(Math.random() * 151);
+      // setFourthPokemon(pokemonArray[randomFour].image);
+       //const randomFive = Math.floor(Math.random() * 151) +1;
        //pokemonTeamHandler(pokemonArray[randomFive].image);
 
-       setFifthPokemon(pokemonArray[randomFive].image);
-       const randomSix = Math.floor(Math.random() * 151);
+       //setFifthPokemon(pokemonArray[randomFive].image);
+      // const randomSix = Math.floor(Math.random() * 151) +1;
        //pokemonTeamHandler(pokemonArray[randomSix].image);
-       const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
-       setSixthPokemon(pokemonArray[randomSix].image);
-       setTeamPokemon([pokemonArray[randomOne].image,pokemonArray[randomTwo].image,pokemonArray[randomThree].image,pokemonArray[randomFour].image,pokemonArray[randomFive].image,pokemonArray[randomSix].image  ])
+     //  const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
+     //  setSixthPokemon(pokemonArray[randomSix].image);
+       setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamArray[1]].image,pokemonArray[randomTeamArray[2]].image,pokemonArray[randomTeamArray[3]].image,pokemonArray[randomTeamArray[4]].image,pokemonArray[randomTeamArray[5]].image  ])
 
     }
 
