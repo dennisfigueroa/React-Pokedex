@@ -88,17 +88,31 @@ function Home() {
     //Find a fix for repeated pokemon
     const randomizeTeam = () => {
        const randomOne = Math.floor(Math.random() * 151);
-       setFirstPokemon(unclickedPokemonArray[randomOne].image);
+      // pokemonTeamHandler(pokemonArray[randomOne].image);
+
+       setFirstPokemon(pokemonArray[randomOne].image);
        const randomTwo = Math.floor(Math.random() * 151);
+       //pokemonTeamHandler(pokemonArray[randomTwo].image);
+
        setSecondPokemon(pokemonArray[randomTwo].image);
        const randomThree = Math.floor(Math.random() * 151);
+       //pokemonTeamHandler(pokemonArray[randomThree].image);
+
        setThirdPokemon(pokemonArray[randomThree].image);
        const randomFour = Math.floor(Math.random() * 151);
+       //pokemonTeamHandler(pokemonArray[randomFour].image);
+
        setFourthPokemon(pokemonArray[randomFour].image);
        const randomFive = Math.floor(Math.random() * 151);
+       //pokemonTeamHandler(pokemonArray[randomFive].image);
+
        setFifthPokemon(pokemonArray[randomFive].image);
        const randomSix = Math.floor(Math.random() * 151);
+       //pokemonTeamHandler(pokemonArray[randomSix].image);
+       const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
        setSixthPokemon(pokemonArray[randomSix].image);
+       setTeamPokemon([pokemonArray[randomOne].image,pokemonArray[randomTwo].image,pokemonArray[randomThree].image,pokemonArray[randomFour].image,pokemonArray[randomFive].image,pokemonArray[randomSix].image  ])
+
     }
 
     const pokemonTeamHandler = (imageData) => {
@@ -107,7 +121,7 @@ function Home() {
        
         const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
         const setterForAllPokemonOnTeam = [setFirstPokemon, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
-        for (let i = 0; i < allPokemonOnTeam.length; i++) {
+         for (let i = 0; i < allPokemonOnTeam.length; i++) {
             if (allPokemonOnTeam[i] === pokemonEgg) {
                 const correspondingSetter = setterForAllPokemonOnTeam[i];
                 correspondingSetter(imageData)
