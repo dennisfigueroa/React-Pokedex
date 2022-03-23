@@ -86,6 +86,7 @@ function Home() {
     }
     
     //Find a fix for repeated pokemon
+    //Fixed the repeating/duplicating pokemon that are already on team issue. Essentially kept an array that recorded numbers and would only add another if it was ensured it wasn't a part of the existing array. 
     const randomizeTeam = () => {
 
        const randomTeamArray = [];
@@ -103,34 +104,7 @@ function Home() {
       setFifthPokemon(pokemonArray[randomTeamArray[4]].image);
       setSixthPokemon(pokemonArray[randomTeamArray[5]].image);
 
-
-
-
-       //const randomOne = Math.floor(Math.random() * 151) + 1;
-      // pokemonTeamHandler(pokemonArray[randomOne].image);
-
-      // setFirstPokemon(pokemonArray[randomOne].image);
-      // const randomTwo = Math.floor(Math.random() * 151) +1;
-       //pokemonTeamHandler(pokemonArray[randomTwo].image);
-
-      // setSecondPokemon(pokemonArray[randomTwo].image);
-       //const randomThree = Math.floor(Math.random() * 151) +1 ;
-       //pokemonTeamHandler(pokemonArray[randomThree].image);
-
-      // setThirdPokemon(pokemonArray[randomThree].image);
-       //const randomFour = Math.floor(Math.random() * 151) +1;
-       //pokemonTeamHandler(pokemonArray[randomFour].image);
-
-      // setFourthPokemon(pokemonArray[randomFour].image);
-       //const randomFive = Math.floor(Math.random() * 151) +1;
-       //pokemonTeamHandler(pokemonArray[randomFive].image);
-
-       //setFifthPokemon(pokemonArray[randomFive].image);
-      // const randomSix = Math.floor(Math.random() * 151) +1;
-       //pokemonTeamHandler(pokemonArray[randomSix].image);
-     //  const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
-     //  setSixthPokemon(pokemonArray[randomSix].image);
-       setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamArray[1]].image,pokemonArray[randomTeamArray[2]].image,pokemonArray[randomTeamArray[3]].image,pokemonArray[randomTeamArray[4]].image,pokemonArray[randomTeamArray[5]].image  ])
+setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamArray[1]].image,pokemonArray[randomTeamArray[2]].image,pokemonArray[randomTeamArray[3]].image,pokemonArray[randomTeamArray[4]].image,pokemonArray[randomTeamArray[5]].image  ])
 
     }
 
