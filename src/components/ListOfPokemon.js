@@ -239,7 +239,7 @@ setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamAr
                 <select ref ={inputRef} onChange={clickHandler}>
                 {pokemonTypes.map((types) => {return <option value = {types}>{types.charAt(0).toUpperCase()+types.slice(1)}</option>})} 
                 </select>
-
+                
                 </div>
                 
                 <div id="pokedex-slot">

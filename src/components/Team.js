@@ -48,26 +48,25 @@ function Team({ firstPokemon, setFirstPokemon, secondPokemon, setSecondPokemon, 
     
 
     return (
-        <Container className="d-flex justify-content-center align-items-center mb-5 mt-5" style={{ backgroundColor: '#f2f3f2', paddingBottom: '2.5rem', borderRadius:'2rem' }}>
-          <div>
+        <Container className="justify-content-center align-items-center mb-5 mt-5" style={{ backgroundColor: '#f2f3f2', paddingBottom: '2.5rem', borderRadius:'2rem' }}>
+            <div id="teamPokemon" className="d-flex">
                 <img src={firstPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(firstPokemon, setFirstPokemon)}}/>
-            </div>
-            <div>
+          
+          
                 <img src={secondPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(secondPokemon, setSecondPokemon)}}/>
-            </div>
-            <div>
+         
+      
                 <img src={thirdPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(thirdPokemon, setThirdPokemon)}}/>
-            </div>
-            <div>
+       
+         
                 <img src={fourthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(fourthPokemon, setFourthPokemon)}}/>
-            </div>
-            <div>
+           
                 <img src={fifthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(fifthPokemon, setFifthPokemon)}}/>
-            </div>
-            <div>
+       
                 <img src={sixthPokemon} style={{maxWidth:'190px'}} onClick={() => {placeEgg(sixthPokemon, setSixthPokemon)}}/>
-            </div>
-           <button onClick ={randomizeTeam}>Randomize Team</button>
+      
+                </div>
+           <button onClick ={randomizeTeam} className="btn btn-primary mt-3">Random Team</button>
         </Container>
     )
 }
