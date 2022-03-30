@@ -109,9 +109,8 @@ setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamAr
     }
 
     const pokemonTeamHandler = (imageData) => {
+        if (teamPokemon.length <6) {
         setTeamPokemon(teamArray => [...teamArray, imageData]);
-
-       
         const allPokemonOnTeam = [firstPokemon, secondPokemon, thirdPokemon, fourthPokemon, fifthPokemon, sixthPokemon];
         const setterForAllPokemonOnTeam = [setFirstPokemon, setSecondPokemon, setThirdPokemon, setFourthPokemon, setFifthPokemon, setSixthPokemon];
          for (let i = 0; i < allPokemonOnTeam.length; i++) {
@@ -121,7 +120,7 @@ setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamAr
                 break;
             }
         }
-
+    }
     }
 
     
@@ -239,7 +238,7 @@ setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamAr
                 <select ref ={inputRef} onChange={clickHandler}>
                 {pokemonTypes.map((types) => {return <option value = {types}>{types.charAt(0).toUpperCase()+types.slice(1)}</option>})} 
                 </select>
-                
+
                 </div>
                 
                 <div id="pokedex-slot">
