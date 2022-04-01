@@ -89,9 +89,9 @@ function Home() {
     //Fixed the repeating/duplicating pokemon that are already on team issue. Essentially kept an array that recorded numbers and would only add another if it was ensured it wasn't a part of the existing array. 
     const randomizeTeam = () => {
 
-       const randomTeamArray = [];
+       const randomTeamArray = []; //Create an array of random pokemon based on the random number. 
        let i;
-       for(i =0; randomTeamArray.length < 6; i++) {
+       for(i =0; randomTeamArray.length < 6; i++) { 
            let randomNumber = Math.floor(Math.random() * 151) + 1;
            if (randomTeamArray.indexOf(randomNumber) === -1) {
            randomTeamArray.push(randomNumber);
