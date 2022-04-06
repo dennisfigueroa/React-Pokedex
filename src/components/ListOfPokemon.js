@@ -90,11 +90,12 @@ function Home() {
     const randomizeTeam = () => {
 
        const randomTeamArray = []; //Create an array of random pokemon based on the random number. 
-       let i;
-       for(i =0; randomTeamArray.length < 6; i++) { 
+       let teamCounter;
+       for(teamCounter =0; randomTeamArray.length < 6; teamCounter++) { 
            let randomNumber = Math.floor(Math.random() * 151) + 1;
            if (randomTeamArray.indexOf(randomNumber) === -1) {
            randomTeamArray.push(randomNumber);
+           console.log(randomTeamArray)
            }
        }
       setFirstPokemon(pokemonArray[randomTeamArray[0]].image);
@@ -102,7 +103,7 @@ function Home() {
       setThirdPokemon(pokemonArray[randomTeamArray[2]].image);
       setFourthPokemon(pokemonArray[randomTeamArray[3]].image);
       setFifthPokemon(pokemonArray[randomTeamArray[4]].image);
-      setSixthPokemon(pokemonArray[randomTeamArray[5]].image);
+      setSixthPokemon(pokemonArray[randomTeamArray[5]].image);  
 
 setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamArray[1]].image,pokemonArray[randomTeamArray[2]].image,pokemonArray[randomTeamArray[3]].image,pokemonArray[randomTeamArray[4]].image,pokemonArray[randomTeamArray[5]].image  ])
 
