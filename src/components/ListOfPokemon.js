@@ -129,7 +129,7 @@ setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamAr
          setTeamPokemon(teamPokemon.filter((pokemonImage) => pokemonImage != image ))
   }
 
-    useEffect(() => {
+    useEffect( () => {
         /* This uses a custom hook to work, what it does is it sets isMount to true initially, 
         and will only convert it to false after the first render. It uses ref instead of state
         since we don't want to trigger a re-render. Once teamPokemon changes, it will run the following to update the view. 
