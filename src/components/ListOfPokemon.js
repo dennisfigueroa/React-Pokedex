@@ -141,7 +141,7 @@ setTeamPokemon([pokemonArray[randomTeamArray[0]].image,pokemonArray[randomTeamAr
     }, [teamPokemon])
 
     useEffect(() => {
-    if (!isMount){
+    if (!isMount ){
         if (filteredPokemonArray) {                                            
             try{                              
             setFilteredPokemonArray(unclickedPokemonArray.filter(pokemon => pokemon.type.includes(inputRef.current.value))) //Filter the filtered array and if pokemon image is not a part of team, display. 
